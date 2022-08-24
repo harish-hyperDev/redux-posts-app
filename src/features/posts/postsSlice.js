@@ -47,6 +47,14 @@ const postsSlice = createSlice({
         postEdit: {
             reducer(state, action) {
                 console.log(action.payload)
+                
+                state.map(post => {
+                        if(action.payload.id === post.id) {
+                            post.title = action.payload.title
+                            post.content = action.payload.content
+                        }
+                    }
+                )
             },
             prepare(id,title,content) {
                 return {
