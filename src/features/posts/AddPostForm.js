@@ -11,7 +11,8 @@ const AddPostForm = () => {
     const onTitleChange = (e) => setTitle(e.target.value);
     const onContentChange = (e) => setContent(e.target.value);
 
-    const onSavePost = () => {
+    const onSavePost = (e) => {
+        e.preventDefault();
         if (title && content) {
             dispatch(
                 postAdded(title, content)
@@ -28,26 +29,28 @@ const AddPostForm = () => {
     }
 
     return (
-        <section style={{ border: "1px solid grey", borderRadius: "6px", alignContent: 'center', textAlign: "center" }}>
-            <form style={{ textAlign: "left", padding: "5% 15%", borderRadius: "6px", display: "inline-grid", gridTemplateColumns: "100px 225px" }}>
+        <section style={{ border: "1px solid grey", width: "fit-content" ,borderRadius: "6px", alignContent: 'center', textAlign: "center" }}>
+            <form style={{ textAlign: "left", padding: "5% 15%", borderRadius: "6px", display: "inline-grid", width: "fit-content", gridTemplateColumns: "100px 225px" }}>
                 <label htmlFor="postTitle">Post Title:</label>
                 <input
+                    style={{width: "70%"}}
                     type="text"
                     id="postTitle"
                     name="postTitle"
-                    value={title}
+                    value={title}   
                     onChange={onTitleChange}
                 />
 
                 <label htmlFor="postContent">Post Content:</label>
                 <textarea
+                    style={{width: "70%"}}
                     id="postContent"
                     name="postContent"
                     value={content}
                     onChange={onContentChange}
                 />
             </form>
-            <button style={{ marginBottom: "20px" }} type="button" onClick={onSavePost}>Save Post</button>
+            <button style={{ marginBottom: "20px" }} type="button" onClick={(event) => onSavePost(event)}>Save Post</button>
         </section>
     )
 }
