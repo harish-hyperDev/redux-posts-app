@@ -12,9 +12,16 @@ const AddPostForm = () => {
     const onContentChange = (e) => setContent(e.target.value);
 
     const onSavePost = () => {
-        title && content && dispatch(
-            postAdded(title, content)
-        )
+        if (title && content) {
+            dispatch(
+                postAdded(title, content)
+                // postAdded({
+                //     id: some_id,
+                //     title,
+                //     content
+                // })
+            )
+        }
         setTitle('')
         setContent('')
 
@@ -40,7 +47,7 @@ const AddPostForm = () => {
                     onChange={onContentChange}
                 />
             </form>
-            <button style={{marginBottom: "20px"}} type="button" onClick={onSavePost}>Save Post</button>
+            <button style={{ marginBottom: "20px" }} type="button" onClick={onSavePost}>Save Post</button>
         </section>
     )
 }

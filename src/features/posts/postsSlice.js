@@ -9,6 +9,11 @@ const postsSlice = createSlice({
     name: 'posts',
     initialState,
     reducers: {
+        /*
+            postAdded(state, action) {
+                return ([ ...state, action.payload ])
+            }
+        */
         postAdded:{ 
             reducer(state, action) {
                 return ([ ...state, action.payload ])
@@ -25,13 +30,24 @@ const postsSlice = createSlice({
         },
         postDelete: {
             reducer(state, action) {
-                
+                console.log("state", action.payload)
+                return (
+                    state.filter(post => action.payload.id !== post.id )
+                )
+            },
+            prepare(id) {
+                // console.log(id, title, content)
+                return { 
+                    payload: {
+                        id
+                    } 
+                }
             }
         }
     }
 })
 
 export const selectAllPosts = (state) => state.posts;
-export const { postAdded } = postsSlice.actions;
+export const { postAdded, postDelete } = postsSlice.actions;
 
 export default postsSlice.reducer;
